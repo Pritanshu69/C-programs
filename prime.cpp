@@ -17,9 +17,9 @@ int main(){
         }
     }
     if(isPrime == 0){
-        cout<<"Is not a prime number";
+        cout<<"Is not a prime number"<<endl;
     }
     else{
-        cout<<"Is a prime number";
+        cout<<"Is a prime number"<<endl;
     }
 }
