@@ -18,6 +18,7 @@ public:
     void push(int value){
         if(top == MAX_SIZE -1 ){
             cout<<"Stack overflow can't push"<< value <<endl;
+            return;
         }
         arr[++top] = value;
         cout<<"Pushed element"<< value << "onto the stack" << endl;
