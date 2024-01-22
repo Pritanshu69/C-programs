@@ -37,8 +37,7 @@ void insertAtTail(Node* &tail, int d){
     tail -> next = temp;
     tail = temp;
 }
-
-void insertAtPosition(Node* &head, int position, int d){
+void insertAtPosition(Node* &head, Node* &tail, int position, int d){
     if(position == 1){
         insertAtHead(head, d);
         return;
@@ -51,12 +50,15 @@ void insertAtPosition(Node* &head, int position, int d){
         temp = temp->next;
         count++;
     }
+
     Node* nodeToInsert = new Node(d);
 
-    nodeToInsert-> next = temp-> next;
-
+    nodeToInsert->next = temp->next;
+    temp->next->prev = nodeToInsert;  // Corrected line
     temp->next = nodeToInsert;
+    nodeToInsert->prev = temp;
 }
+
 
 void deleteNode(int position, Node* &head){
     if(position == 1){
