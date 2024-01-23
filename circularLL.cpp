@@ -1,4 +1,5 @@
 #include <iostream>
+#include <map>
 using namespace std;
 
 class Node{
@@ -16,29 +17,60 @@ class Node{
             delete next;
             next = NULL;
         }
-        cout<<"memory is free for node and data"<<value<<endl;
+        cout<<"memory is free for node and data "<<value<<endl;
     }
 };
-void insertElement(Node* tail, int element, int d){
-    if(tail == NULL){
+void insertNode(Node*& tail, int element, int d) {
+    //empty list
+    if (tail == NULL) {
         Node* newNode = new Node(d);
         tail = newNode;
-        newNode->next=newNode;
-    }
-    else{
+        newNode->next = newNode;
+    } 
+    else {
+        //non-empty list
+        //assuming that the element is present in the list
+
         Node* curr = tail;
-        while (curr->data != element)
-        {
-            curr = curr->next;  
+
+        while (curr->data != element) {
+            curr = curr->next;
         }
+
+        //element found -> curr is representing element node
         Node* temp = new Node(d);
         temp->next = curr->next;
-        curr->next = temp;  
+        curr->next = temp;
     }
 }
 
+void deleteNode(Node* &tail, int value){
+    if(tail == NULL ){
+        cout<<"The LL is empty"<<endl;
+        return;
+    }
+    else{
+        //it's not empty
+
+        Node* prev = tail;
+        Node* curr = tail->next;
+        while (curr->data != value){
+            prev = curr;
+            curr = curr->next;
+        }
+            prev->next = curr->next;
+            curr->next=NULL;
+            delete curr;
+    }
+}
+
+
 void display(Node* tail){
     Node* temp = tail;
+        if(tail == NULL) {
+        cout << "List is Empty "<< endl;
+        return ;
+    }
     do{
         cout<<tail->data<<" ";
         tail = tail->next;
@@ -49,9 +81,11 @@ void display(Node* tail){
 int main(){
     Node* tail = NULL;
     
-    insertElement(tail, 5, 3);
+    insertNode(tail, 5, 3);
     display(tail);
-    insertElement(tail, 3, 5);
+    insertNode(tail, 3, 5);
+    display(tail);
+    deleteNode(tail, 5);
     display(tail);
 
     return 0;
